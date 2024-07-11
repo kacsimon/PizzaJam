@@ -19,6 +19,7 @@ public class Possessed : MonoBehaviour
         {
             selectedVisual.SetActive(false);
             GameManager.Instance.SetPossess(false);
+            if (GameManager.Instance.GetPossessLevel() > level) Destroy(gameObject);
         }
     }
 }
