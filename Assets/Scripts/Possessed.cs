@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Possessed : MonoBehaviour
 {
+    [SerializeField] GameObject visual;
+    [SerializeField] GameObject selectedVisual;
+    [SerializeField] int level;
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Collided.");
+            selectedVisual.SetActive(true);
+            if (GameManager.Instance.GetPossessLevel() == level) GameManager.Instance.SetPossess(true);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("Collided.");
+            selectedVisual.SetActive(false);
+            GameManager.Instance.SetPossess(false);
         }
     }
 }
